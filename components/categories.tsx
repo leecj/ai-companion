@@ -18,7 +18,7 @@ const Categories = ({ data }: CategoriesProps) => {
   const onClick = (id: string | undefined) => {
     const query = { categoryId: id };
 
-    const url = qs.stringify(
+    const url = qs.stringifyUrl(
       {
         url: window.location.href,
         query,
