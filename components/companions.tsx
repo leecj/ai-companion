@@ -7,8 +7,8 @@ import { MessageSquare } from "lucide-react";
 interface CompanionProps {
   data: (Companion & {
     _count: {
-      message: number;
-    };
+      messages: number
+    },
   })[];
 }
 
