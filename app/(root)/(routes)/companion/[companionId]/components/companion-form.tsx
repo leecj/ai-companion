@@ -26,6 +26,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Wand2 } from "lucide-react";
+import axios from "axios";
+import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 interface CompanionFormProps {
   initialData: Companion | null;
@@ -81,10 +84,27 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
     },
   });
 
+  const router = useRouter();
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(1111111, values);
+    try {
+      if (initialData) {
+        await axios.patch(`/api/companion/${initialData.id}`, values);
+      } else {
+        await axios.post("/api/companion", values);
+      }
+      toast({
+        description: "Success",
+      });
+      router.refresh();
+      router.push("/");
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        description: "Something went wrong",
+      });
+    }
   };
 
   return (
@@ -246,7 +266,8 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
                   ></Textarea>
                 </FormControl>
                 <FormDescription>
-                Write couple of examples of a human chatting with your AI companion, write expected answers.
+                  Write couple of examples of a human chatting with your AI
+                  companion, write expected answers.
                 </FormDescription>
               </FormItem>
             )}
