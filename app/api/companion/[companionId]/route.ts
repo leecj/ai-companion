@@ -31,6 +31,7 @@ export async function PATCH(
     const companion = await prismadb.companion.update({
       where: {
         id: params.companionId,
+        userId: user.id,
       },
       data: {
         categoryId,
@@ -52,7 +53,7 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params :  { companionId: string } }
+  { params }: { params: { companionId: string } }
 ) {
   try {
     const { userId } = auth();
