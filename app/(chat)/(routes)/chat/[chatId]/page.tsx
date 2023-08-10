@@ -1,4 +1,4 @@
-import ChatClient from "@/components/chat-client";
+import ChatClient from "@/app/(chat)/(routes)/chat/[chatId]/components/client";
 import prismadb from "@/lib/prismadb";
 import { auth, redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
