@@ -1,7 +1,7 @@
 "use client";
 
 import { Companion } from "@prisma/client";
-import ChatMessage from "./chat-message";
+import ChatMessage, { ChatMessageProps } from "./chat-message";
 import { ElementRef, useEffect, useRef, useState } from "react";
 
 interface ChatMessagesProps {
@@ -46,8 +46,8 @@ const ChatMessages = ({
         <ChatMessage
           key={message.content}
           content={message.content}
-          src={message.src}
           role={message.role}
+          src={companion.src}
         />
       ))}
       {isLoading && (
